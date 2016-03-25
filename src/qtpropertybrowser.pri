@@ -1,11 +1,6 @@
-include(../common.pri)
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
-
-qtpropertybrowser-uselib:!qtpropertybrowser-buildlib {
-    LIBS += -L$$QTPROPERTYBROWSER_LIBDIR -l$$QTPROPERTYBROWSER_LIBNAME
-} else {
-    SOURCES += $$PWD/qtpropertybrowser.cpp \
+SOURCES += $$PWD/qtpropertybrowser.cpp \
             $$PWD/qtpropertymanager.cpp \
             $$PWD/qteditorfactory.cpp \
             $$PWD/qtvariantproperty.cpp \
@@ -13,7 +8,7 @@ qtpropertybrowser-uselib:!qtpropertybrowser-buildlib {
             $$PWD/qtbuttonpropertybrowser.cpp \
             $$PWD/qtgroupboxpropertybrowser.cpp \
             $$PWD/qtpropertybrowserutils.cpp
-    HEADERS += $$PWD/qtpropertybrowser.h \
+HEADERS += $$PWD/qtpropertybrowser.h \
             $$PWD/qtpropertymanager.h \
             $$PWD/qteditorfactory.h \
             $$PWD/qtvariantproperty.h \
@@ -21,10 +16,4 @@ qtpropertybrowser-uselib:!qtpropertybrowser-buildlib {
             $$PWD/qtbuttonpropertybrowser.h \
             $$PWD/qtgroupboxpropertybrowser.h \
             $$PWD/qtpropertybrowserutils_p.h
-    RESOURCES += $$PWD/qtpropertybrowser.qrc
-}
-
-win32 {
-    contains(TEMPLATE, lib):contains(CONFIG, shared):DEFINES += QT_QTPROPERTYBROWSER_EXPORT
-    else:qtpropertybrowser-uselib:DEFINES += QT_QTPROPERTYBROWSER_IMPORT
-}
+RESOURCES += $$PWD/qtpropertybrowser.qrc
