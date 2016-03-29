@@ -2,22 +2,25 @@
 
 SET(KIT_SRCS
   qtbuttonpropertybrowser.cpp
-  qtbuttonpropertybrowser.h
   qteditorfactory.cpp
-  qteditorfactory.h
   qtgroupboxpropertybrowser.cpp
-  qtgroupboxpropertybrowser.h
   qtpropertybrowser.cpp
-  qtpropertybrowser.h
   qtpropertybrowserutils.cpp
-  qtpropertybrowserutils_p.h
   qtpropertymanager.cpp
-  qtpropertymanager.h
   qttreepropertybrowser.cpp
-  qttreepropertybrowser.h
   qtvariantproperty.cpp
-  qtvariantproperty.h
   )
+  
+SET(KIT_H
+	qtbuttonpropertybrowser.h
+	qteditorfactory.h
+	qtgroupboxpropertybrowser.h
+	qtpropertybrowser.h
+	qtpropertybrowserutils_p.h #===> also in KIT_MOC_SRCS, think about it...
+	qtpropertymanager.h
+	qttreepropertybrowser.h
+	qtvariantproperty.h
+)
 
 SET(KIT_MOC_SRCS
   qtpropertybrowserutils_p.h
@@ -41,11 +44,15 @@ QT4_ADD_RESOURCES(KIT_QRC_SRCS ${KIT_resources})
 
 SET(libname ${PROJECT_NAME})
 ADD_LIBRARY(${libname} STATIC
+  ${KIT_H}
   ${KIT_SRCS}
   ${KIT_UI_CPP}
   ${KIT_MOC_CPP}
   ${KIT_QRC_SRCS}
   )
+  
+install(TARGETS ${libname} DESTINATION lib)
+install(FILES ${KIT_H} DESTINATION include/${PROJECT_NAME})
   
 SET(${PROJECT_NAME}_LINK_LIBRARIES ${QT_LIBRARIES})
 TARGET_LINK_LIBRARIES(
